@@ -3,8 +3,10 @@ package repository;
 import entity.Dinosaur;
 import lombok.AllArgsConstructor;
 
-import java.sql.*;
-import java.time.LocalDate;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,7 +50,7 @@ public class DinosaurRepository {
     }
 
     public void add(Dinosaur dinosaur) throws SQLException {
-        try (Connection connection = connectionFactory.getConnection()){
+        try (Connection connection = connectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(INSERT_DINOSAUR);
             statement.setLong(1, dinosaur.getTypeOfDinosaurId());
             statement.setString(2, dinosaur.getName());
