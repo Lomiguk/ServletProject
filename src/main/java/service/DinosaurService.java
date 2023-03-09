@@ -17,4 +17,8 @@ public class DinosaurService {
     public Collection<Dinosaur> getAll() throws SQLException {
         return dinosaurRepository.getAll();
     }
+
+    public void add(Dinosaur dinosaur) throws SQLException {
+        dinosaurRepository.add(dinosaur);
+    }
 }

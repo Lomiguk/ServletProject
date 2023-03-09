@@ -5,13 +5,13 @@
   Time: 14:02
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <html>
   <head>
       <title>Title</title>
   </head>
   <body>
-      <form action="./add" method="">
+      <form action="${pageContext.request.contextPath}/dinosaur/add" method="post">
         <p>Type of dinosaur (id):</p>
         <input type="text" name="type_of_dinosaur_id"> <br/>
         <p>Dinosaur's name:</p>

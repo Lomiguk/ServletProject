@@ -13,6 +13,6 @@ public class Dinosaur {
     private String name;
     private LocalDate birthDate;
     private LocalDate deathDate;
-    private long attraction;
+    private long attractionId;
     private long employId;
 }

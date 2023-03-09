@@ -3,10 +3,8 @@ package repository;
 import entity.Dinosaur;
 import lombok.AllArgsConstructor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +15,9 @@ public class DinosaurRepository {
             "SELECT id, name FROM dinosaur WHERE id = ?;";
     private static String SELECT_ALL_QUERY =
             "SELECT id, name FROM dinosaur;";
+    private static String INSERT_DINOSAUR =
+            "INSERT INTO dinosaur (type_of_dinosaur_id, name, attraction_id) VALUES (?, ?, ?);";
+
     private ConnectionFactory connectionFactory;
 
     public Dinosaur get(Long id) throws SQLException {
@@ -28,6 +29,7 @@ public class DinosaurRepository {
             if (resultSet.next()) {
                 return toDinosaurEntity(resultSet);
             }
+            statement.close();
             return null;
         }
     }
@@ -40,7 +42,20 @@ public class DinosaurRepository {
             while (resultSet.next()) {
                 dinosaurSet.add(toDinosaurEntity(resultSet));
             }
+            statement.close();
             return dinosaurSet;
+        }
+    }
+
+    public void add(Dinosaur dinosaur) throws SQLException {
+        try (Connection connection = connectionFactory.getConnection()){
+            PreparedStatement statement = connection.prepareStatement(INSERT_DINOSAUR);
+            statement.setLong(1, dinosaur.getTypeOfDinosaurId());
+            statement.setString(2, dinosaur.getName());
+            statement.setLong(3, dinosaur.getAttractionId());
+
+            statement.executeQuery();
+            statement.close();
         }
     }
 
