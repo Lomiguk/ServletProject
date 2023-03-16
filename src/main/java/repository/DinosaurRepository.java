@@ -31,7 +31,6 @@ public class DinosaurRepository {
             if (resultSet.next()) {
                 return toDinosaurEntity(resultSet);
             }
-            statement.close();
             return null;
         }
     }
@@ -44,7 +43,6 @@ public class DinosaurRepository {
             while (resultSet.next()) {
                 dinosaurSet.add(toDinosaurEntity(resultSet));
             }
-            statement.close();
             return dinosaurSet;
         }
     }
@@ -57,7 +55,6 @@ public class DinosaurRepository {
             statement.setLong(3, dinosaur.getAttractionId());
 
             statement.executeQuery();
-            statement.close();
         }
     }
 

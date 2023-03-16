@@ -15,13 +15,11 @@ import java.sql.SQLException;
 
 @WebServlet("/dinosaur/add")
 public class AddController extends HttpServlet {
-    private static final long serialVersionID = 1L;
-
     private final DinosaurService dinosaurService = new DinosaurService(new DinosaurRepository(new ConnectionFactory()));
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/dinosaur/add.jsp").forward(req, resp);
+        req.getRequestDispatcher("/dinosaur/add.jsp").forward(req, resp);
     }
 
     @Override
@@ -32,7 +30,7 @@ public class AddController extends HttpServlet {
                     .name(req.getParameter("dinosaur_name"))
                     .attractionId(Long.parseLong(req.getParameter("attraction_id")))
                     .build());
-            req.getRequestDispatcher("/WEB-INF/dinosaur/add.jsp").forward(req, resp);
+            req.getRequestDispatcher("/dinosaur/add.jsp").forward(req, resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

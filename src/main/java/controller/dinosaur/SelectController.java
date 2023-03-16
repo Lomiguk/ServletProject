@@ -26,7 +26,7 @@ public class SelectController extends HttpServlet {
             req.setAttribute("dinosaurId", dinosaur.getId());
             req.setAttribute("dinosaurName", dinosaur.getName());
 
-            req.getRequestDispatcher("/WEB-INF/dinosaur/select.jsp").forward(req, resp);
+            req.getRequestDispatcher("/dinosaur/select.jsp").forward(req, resp);
         } catch (SQLException | ServletException e) {
             throw new RuntimeException(e);
         }
